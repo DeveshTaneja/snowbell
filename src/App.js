@@ -47,7 +47,7 @@ const BirthdaySurprise = () => {
         </motion.p>
       )}
       <button className="magic-button" onClick={handleButtonClick}>
-        {showSnow ? "❄ Stop Magic ❄" : "Click Me for Magic!"}
+        {showSnow ? "❄ Stop it huh! ❄" : "Gift of Snow 🎁"}
       </button>
     </div>
   );
