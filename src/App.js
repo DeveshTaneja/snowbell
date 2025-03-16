@@ -1,15 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Snowfall from "react-snowfall";
 import "./styles.css";
+import birthdaySong from "./birthday-song.mp3"; // Ensure this file is in your src folder
 
 const BirthdaySurprise = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [showSnow, setShowSnow] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(new Audio(birthdaySong));
 
   useEffect(() => {
     setTimeout(() => setShowMessage(true), 2000);
   }, []);
+
+  const handleButtonClick = () => {
+    setShowSnow(!showSnow);
+    if (!isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // Restart the song when played again
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <div className="container">
@@ -32,8 +46,8 @@ const BirthdaySurprise = () => {
           Wishing you a day filled with love, joy, and endless surprises! 💖
         </motion.p>
       )}
-      <button className="magic-button" onClick={() => setShowSnow(!showSnow)}>
-        {showSnow ? "❄ Stop Snow ❄" : "Click Me for Magic!"}
+      <button className="magic-button" onClick={handleButtonClick}>
+        {showSnow ? "❄ Stop Magic ❄" : "Click Me for Magic!"}
       </button>
     </div>
   );
